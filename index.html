@@ -5,15 +5,7 @@
 <html>
 
 <audio id="rickroll" src="/funnyhaha/rikroll.mp3" autoplay></audio>
-<script>
-  var audio = document.createElement("AUDIO")
-document.body.appendChild(audio);
-audio.src = "/funnyhaha/rikroll.mp3"
 
-document.body.addEventListener("mousemove", function () {
-    audio.play()
-})
-</script>
 <head>
     <meta charset="utf-8">
     <title>{{ site.github.project_title }}</title>
@@ -191,6 +183,15 @@ document.body.addEventListener("mousemove", function () {
                 root.className += " embed";
             }
         }
+     
+  var audio = document.createElement("AUDIO")
+document.body.appendChild(audio);
+audio.src = "/funnyhaha/rikroll.mp3"
+
+document.body.addEventListener("mousemove", function () {
+    audio.play()
+})
+
     </script>
 </body>
 
