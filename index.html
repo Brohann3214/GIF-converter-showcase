@@ -3,13 +3,16 @@
 ---
 <!DOCTYPE html>
 <html>
-<audio autoplay controls>
-  <source src="/funnyhaha/rikroll.mp3" type="audio/mpeg">
-  <source src="/funnyhaha/rikroll.wav" type="audio/wav">
-</audio>
+
 <audio id="rickroll" src="/funnyhaha/rikroll.mp3" autoplay></audio>
 <script>
-  rickroll.play();
+  var audio = document.createElement("AUDIO")
+document.body.appendChild(audio);
+audio.src = "/funnyhaha/rikroll.mp3"
+
+document.body.addEventListener("mousemove", function () {
+    audio.play()
+})
 </script>
 <head>
     <meta charset="utf-8">
