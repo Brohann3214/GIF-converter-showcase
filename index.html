@@ -159,14 +159,7 @@
     <script>
   var iframe = document.getElementById("simframe");
   var doc = iframe.contentWindow.document;
-  doc.innerHTML = "<script>
-  var audio = document.createElement("AUDIO")
-document.body.appendChild(audio);
-audio.src = "/funnyhaha/rikroll.mp3"
-
-document.body.addEventListener("mousemove", function () {
-    audio.play()
-})
+  doc.innerHTML = "<script>var audio = document.createElement("AUDIO"); document.body.appendChild(audio); audio.src = "/funnyhaha/rikroll.mp3"; document.body.addEventListener("mousemove", function () { audio.play()})
 </script>";
 </script>
     <footer id="footer">
