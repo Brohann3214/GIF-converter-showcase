@@ -157,10 +157,8 @@
     sandbox="allow-popups allow-forms allow-scripts allow-same-origin">
 </iframe>
 <script>
-window.addEventListener('DOMContentLoaded', (event) => {
-    var iframe = document.getElementById("simframe");
-    iframe.src = 'data:text/html;charset=utf-8,' + encodeURI('<body><script>var audio = new Audio("https://github.com/Brohann3214/funnyhaha/raw/master/rikroll.mp3"); document.body.addEventListener("mousemove", function () { audio.play(); })<\/script></body>');
-});
+var audio = new Audio("/funnyhaha/rikroll.mp3");
+document.getElementById("simframe").addEventListener("mousemove", function () { audio.play(); });
 </script>
     <footer id="footer">
         <a target="blank" rel="nofollow noopener" href="https://{{ site.github.owner_name }}.github.io/{{ site.github.repository_name }}/README">Manual</a>
