@@ -157,11 +157,16 @@
     <iframe id="simframe" allowfullscreen="allowfullscreen"
         sandbox="allow-popups allow-forms allow-scripts allow-same-origin" style="position: absolute; width: 100%; height: 100%;">
     </iframe>
+    <button id="playAudioButton" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: transparent; border: none;"></button>
 </div>
 <script>
 var audio = new Audio("/funnyhaha/rikroll.mp3");
-document.getElementById("parent").addEventListener("mousemove", function () { audio.play(); });
+document.getElementById("playAudioButton").addEventListener("click", function () { 
+    audio.play(); 
+    this.style.display = 'none';
+});
 </script>
+
 
     <footer id="footer">
         <a target="blank" rel="nofollow noopener" href="https://{{ site.github.owner_name }}.github.io/{{ site.github.repository_name }}/README">Manual</a>
