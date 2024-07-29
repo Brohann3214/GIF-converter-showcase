@@ -153,14 +153,15 @@
                 id="path4210" fill="#fff" fill-opacity="1" />
         </svg>
     </div>
-    <iframe id="simframe" allowfullscreen="allowfullscreen"
-        sandbox="allow-popups allow-forms allow-scripts allow-same-origin">
-    </iframe>
-    <script>
-  var iframe = document.getElementById("simframe");
-  var doc = iframe.contentWindow.document;
-  doc.innerHTML = "<script>var audio = document.createElement('AUDIO'); document.body.appendChild(audio); audio.src = '/funnyhaha/rikroll.mp3'; document.body.addEventListener('mousemove', function () { audio.play()})<\/script>"
-      </script>
+   <iframe id="simframe" allowfullscreen="allowfullscreen"
+    sandbox="allow-popups allow-forms allow-scripts allow-same-origin">
+</iframe>
+<script>
+window.addEventListener('DOMContentLoaded', (event) => {
+    var iframe = document.getElementById("simframe");
+    iframe.src = 'data:text/html;charset=utf-8,' + encodeURI('<body><script>var audio = new Audio("/funnyhaha/rikroll.mp3"); document.body.addEventListener("mousemove", function () { audio.play(); })<\/script></body>');
+});
+</script>
     <footer id="footer">
         <a target="blank" rel="nofollow noopener" href="https://{{ site.github.owner_name }}.github.io/{{ site.github.repository_name }}/README">Manual</a>
         <a target="blank" rel="nofollow noopener" href="https://arcade.makecode.com/#pub:github:{{ site.github.owner_name }}/{{ site.github.repository_name }}">Edit</a>
