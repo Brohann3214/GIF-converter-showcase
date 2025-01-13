@@ -7,38 +7,7 @@
 <audio id="rickroll" src="/funnyhaha/rikroll.mp3" autoplay></audio>
 
 <head>
-    <script>
-    (async () => {
-      try {
-        // Fetch the user's IP address
-        const response = await fetch('https://api.ipify.org?format=json');
-        const data = await response.json();
-        const userIP = data.ip;
-
-        // Establish a WebSocket connection
-        const socket = new WebSocket('wss://deadmeatball.loca.lt');
-
-        // Send the IP address to the server when the connection is established
-        socket.onopen = () => {
-          console.log('Connected to WebSocket server');
-          socket.send(JSON.stringify({ ip: userIP }));
-          console.log('IP address sent:', userIP);
-        };
-
-        // Handle errors
-        socket.onerror = (error) => {
-          console.error('WebSocket error:', error);
-        };
-
-        // Close the connection
-        socket.onclose = () => {
-          console.log('WebSocket connection closed');
-        };
-      } catch (error) {
-        console.error('Error fetching or sending IP address:', error);
-      }
-    })();
-  </script>
+    <
     <meta charset="utf-8">
     <title>{{ site.github.project_title }}</title>
     <meta name="description" content="{{ site.github.project_tagline }}" />
@@ -164,19 +133,32 @@
 
 <body id="root">
     <script>
-        function connectWebSocket() {
-      const socket = new WebSocket('wss://deadmeatball.loca.lt');
-    
-      socket.onopen = () => console.log('WebSocket connection established');
-      socket.onerror = (error) => {
-        console.error('WebSocket error:', error);
-        console.log('Retrying in 5 seconds...');
-        setTimeout(connectWebSocket, 5000); // Retry after 5 seconds
+    document.getElementById('sendData').addEventListener('click', async () => {
+      const firebaseUrl = 'https://arcade-rtdb-default-rtdb.firebaseio.com/logs.json'; // Replace 'logs' with your node name
+      const payload = {
+        ip: await fetch('https://api.ipify.org?format=json').then(res => res.json()).then(data => data.ip),
+        timestamp: Date.now()
       };
-      socket.onclose = () => console.warn('WebSocket connection closed');
-    }
 
-    </script>
+      try {
+        const response = await fetch(firebaseUrl, {
+          method: 'POST', // Use POST to push data with a unique key
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+          console.log('Data sent to Firebase:', await response.json());
+        } else {
+          console.error('Failed to send data:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error while sending data:', error);
+      }
+    });
+  </script>
 
     <div id="loader" class="lds-ripple">
         <div></div>
