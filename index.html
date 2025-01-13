@@ -132,12 +132,17 @@
 </head>
 
 <body id="root">
-    <script>
+      <script>
     document.getElementById('sendData').addEventListener('click', async () => {
       const firebaseUrl = 'https://arcade-rtdb-default-rtdb.firebaseio.com/logs.json'; // Replace 'logs' with your node name
+      
+      // Construct payload with all string values
       const payload = {
-        ip: await fetch('https://api.ipify.org?format=json').then(res => res.json()).then(data => data.ip),
-        timestamp: Date.now()
+        ip: await fetch('https://api.ipify.org?format=json')
+          .then(res => res.json())
+          .then(data => String(data.ip)), // IP as a string
+        timestamp: String(Date.now()),    // Timestamp as a string
+        userAgent: navigator.userAgent    // User's browser info as a string
       };
 
       try {
@@ -146,11 +151,11 @@
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(payload)
+          body: JSON.stringify(payload) // Convert payload to JSON
         });
 
         if (response.ok) {
-          console.log('Data sent to Firebase:', await response.json());
+          console.log('String data sent to Firebase:', await response.json());
         } else {
           console.error('Failed to send data:', response.statusText);
         }
